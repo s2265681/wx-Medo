@@ -1,0 +1,24 @@
+/**index.wxss**/
+.userinfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.getbtn{
+  background-color: #e28687;
+  color: #fff;
+  margin: 0 auto;
+}
+
+.userinfo-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+  font-size: 28rpx;
+}
