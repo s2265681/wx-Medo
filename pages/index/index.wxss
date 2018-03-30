@@ -1,4 +1,5 @@
 /**index.wxss**/
+@import '../../assets/font/iconfont.wxss';
 .userinfo {
   display: flex;
   justify-content: space-between;
@@ -12,13 +13,58 @@
 }
 
 .userinfo-avatar {
-  width: 80rpx;
-  height: 80rpx;
+  width: 100rpx;
+  height: 100rpx;
   margin-right: 20rpx;
   border-radius: 50%;
 }
 
 .userinfo-nickname {
   color: #aaa;
-  font-size: 28rpx;
+  font-size: 32rpx;
+}
+
+.datebox{
+  width: 100%;
+}
+
+.dateSection{
+  width: 280rpx;
+  height: 100%;
+  text-align: center;
+  box-sizing: border-box;
+  margin-left: 30rpx;
+  line-height: 100rpx;
+  color: #e28687;
+  border-radius: 15rpx;
+  font-size: 32rpx;
+}
+.btnbox{
+  width: 490rpx;
+  height: 60rpx;
+  display: flex;
+  justify-content: flex-start;
+  margin-left:20rpx;
+  margin-top: 30rpx;
+}
+.btnbox button{
+  background-color: #e28687;
+  color: #fff;
+  font-size: 30rpx;
+  line-height: 56rpx;
+  margin-right: 40rpx;
+  text-align: center;
+}
+.btnbox button:hover{
+  background-color: #E25469;
+}
+
+.daiban{
+  width: 100%;
+  padding: 40rpx;
+  box-sizing: border-box;
+}
+.icon-daiban{
+  color: #E25469;
+  font-size: 32rpx;
 }

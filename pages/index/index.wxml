@@ -4,7 +4,26 @@
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="getbtn"> 获取头像昵称 </button>
     <block wx:else>
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}， 您好</text>
+      <text class="userinfo-nickname">Hi , {{userInfo.nickName}}</text>
     </block>
   </view>
+  <view class="dateSection">
+    <picker mode="date" value="{{date}}" start="2015-09-01" end="2020-12-31" bindchange="bindDateChange">
+      <view class="picker">
+        {{date}}
+      </view>
+    </picker>
+  </view>
+</view>
+
+<view class="btnbox">
+  <button bindtap='next' class="iconfont icon-left"></button>
+  <button bindtap='prev' class="iconfont icon-arrow-right"></button> 
+  <button bindtap='today'>Today</button>   
+</view>
+<view>
+  <textarea placeholder='编辑内容'></textarea>
+</view>
+<view class="daiban">
+  <text class="iconfont icon-daiban"> 待办事项 </text>
 </view>
