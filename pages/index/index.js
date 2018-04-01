@@ -9,7 +9,11 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
-    date: util.formatTime(new Date,false)
+    date: util.formatTime(new Date,'d'),
+    textareaShow: false,
+    doingList: [],
+    doneList: [],
+    textareaValue: ''
   },
   
   bindViewTap: function() {
@@ -40,6 +44,21 @@ Page({
         }
       })
     }
+    wx.getStorage({
+      key: 'todoList',
+      success: (res) => {
+        let data = res.data;
+        data.forEach(v=>{
+          if (v.date === this.data.date){
+            this.setData({
+              doingList: v.list.filter(m => m.state === 'doing'),
+              doneList: v.list.filter(m => m.state === 'done')
+            })
+          }
+        })
+        console.log(this.data.doingList);
+      }
+    })
   },
 
   getUserInfo: function(e) {
@@ -65,7 +84,7 @@ Page({
   gettime(type){
     let time = type === 'n' ? new Date(this.data.date).getTime() + 24 * 60 * 60 * 1000 : new Date(this.data.date).getTime() - 24 * 60 * 60 * 1000;
     this.setData({
-      date: util.formatTime(new Date(time), false)
+      date: util.formatTime(new Date(time), 'd')
     })
   },
 
@@ -75,5 +94,41 @@ Page({
 
   prev(){
     this.gettime('p');
+  },
+
+  settextareaShow(){
+    this.setData({
+      textareaShow: !this.data.textareaShow
+    })
+  },
+
+  settextareaValue(e){
+    this.setData({
+      textareaValue: e.detail.value
+    })
+  },
+
+  submit() {
+    let time = util.formatTime(new Date(), 't');
+    if(!wx.getStorageSync('todoList')){
+      this.setData({
+        doingList: this.data.doingList.push({
+          time: time,
+          text: this.data.textareaValue,
+          state: 'doing'
+        })
+      })
+      wx.setStorage({
+        key: 'todoList',
+        data: [{
+          date:this.data.date,
+          list:[{
+            time: time,
+            text: this.data.textareaValue,
+            state: 'doing'
+          }]
+        }],
+      })
+    }
   }
 })

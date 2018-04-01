@@ -8,22 +8,42 @@
     </block>
   </view>
   <view class="dateSection">
+    <button bindtap='prev' class="iconfont icon-left" hover-class="bg_red"></button>
     <picker mode="date" value="{{date}}" start="2015-09-01" end="2020-12-31" bindchange="bindDateChange">
       <view class="picker">
         {{date}}
       </view>
     </picker>
+    <button bindtap='next' class="iconfont  icon-arrow-right" hover-class="bg_red"></button>
   </view>
 </view>
 
-<view class="btnbox">
-  <button bindtap='next' class="iconfont icon-left"></button>
-  <button bindtap='prev' class="iconfont icon-arrow-right"></button> 
-  <button bindtap='today'>Today</button>   
+<button bindtap='today' class="btntoday" hover-class="bg_red">Today</button>
+
+<view class="editthing">
+  <view class="textbox" bindtap="settextareaShow">
+    <view class="icon-xinzeng iconfont {{textareaShow ? 'rote' : ''}}"></view>
+    <text>新建事件</text>
+  </view>
+
+  <textarea placeholder-class="holdercolor" show-confirm-bar="{{false}}" class="editarea {{textareaShow ? 'show' : ''}}" value="{{textareaValue}}" bindinput="settextareaValue"></textarea>
+
+  <button bindtap='submit' class="btnsub" hover-class="bg_red" wx:if="{{textareaShow}}">确定</button>
+  <button bindtap='cancel' class="btnsub btncancel" hover-class="bg_red" wx:if="{{textareaShow}}">取消</button>
 </view>
-<view>
-  <textarea placeholder='编辑内容'></textarea>
-</view>
+
 <view class="daiban">
-  <text class="iconfont icon-daiban"> 待办事项 </text>
+  <view class="textbox" bindtap="settextareaShow">
+    <view class="iconfont icon-daiban {{textareaShow ? 'rote' : ''}}">
+    </view>
+    <text>待办事件</text>
+  </view>
+</view>
+
+<view class="done">
+  <view class="textbox" bindtap="settextareaShow">
+    <view class="iconfont icon-yiwancheng {{textareaShow ? 'rote' : ''}}">
+    </view>
+    <text>已完成</text>
+  </view>
 </view>

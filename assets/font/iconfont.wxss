@@ -14,7 +14,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-xinzeng:before { content: "\e623"; }
+.icon-xinzeng:before { content: "\e623";}
 
 .icon-beiwangluliebiao:before { content: "\e60f"; }
 
@@ -22,7 +22,7 @@
 
 .icon-jiantou1-copy-copy:before { content: "\e7a6"; }
 
-.icon-add:before { content: "\e6d2"; }
+.icon-add:before { content: "\e6d2";}
 
 .icon-arrow-right:before { content: "\e604"; }
 
@@ -30,4 +30,4 @@
 
 .icon-left:before { content: "\e605"; }
 
-.icon-daiban:before { content: "\e641"; margin-right: 16rpx}
+.icon-daiban:before { content: "\e641";}

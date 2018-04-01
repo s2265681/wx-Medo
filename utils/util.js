@@ -1,14 +1,16 @@
-const formatTime = (date, flag=true) => {
+const formatTime = (date, type='dt') => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
   const hour = date.getHours()
   const minute = date.getMinutes()
   const second = date.getSeconds()
-  if(flag){
+  if(type === 'dt'){
     return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':');
-  }else{
+  } else if(type === 'd'){
     return [year, month, day].map(formatNumber).join('-');
+  } else if (type === 't') {
+    return [hour, minute, second].map(formatNumber).join(':');
   }
 }
 

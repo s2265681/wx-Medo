@@ -29,7 +29,7 @@
 }
 
 .dateSection{
-  width: 280rpx;
+  width: 360rpx;
   height: 100%;
   text-align: center;
   box-sizing: border-box;
@@ -38,33 +38,117 @@
   color: #e28687;
   border-radius: 15rpx;
   font-size: 32rpx;
-}
-.btnbox{
-  width: 490rpx;
-  height: 60rpx;
   display: flex;
   justify-content: flex-start;
-  margin-left:20rpx;
-  margin-top: 30rpx;
+  align-items: center;
 }
-.btnbox button{
+
+.dateSection picker{
+  margin: 0 10rpx;
+}
+
+.dateSection button{
+  font-size: 36rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  color: #fff;
+  background-color: #e28687;
+  padding: 0;
+  width: 60rpx;
+}
+.dateSection .bg_red{
+  background-color: #E25469;
+  border-radius: 10rpx;
+  color: #fff;
+}
+
+.btntoday{
+  width: 140rpx;
   background-color: #e28687;
   color: #fff;
   font-size: 30rpx;
   line-height: 56rpx;
-  margin-right: 40rpx;
+  margin-left: 20rpx;
   text-align: center;
-}
-.btnbox button:hover{
-  background-color: #E25469;
+  margin-bottom: 20rpx;
+  display: none;
 }
 
-.daiban{
+.editthing{
+  width: 650rpx;
+  padding: 0 30rpx 30rpx;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.textbox{
+  color: #E25469;
+  width: 240rpx;
+}
+
+.editthing .icon-xinzeng,.done .icon-yiwancheng,.daiban .icon-daiban{
+  font-size: 36rpx;
+  transition: transform 0.5s;
+  display: inline-block;
+  width: 40rpx;
+  margin-right: 20rpx;
+}
+
+.editthing .rote{
+  transform: rotateZ(135deg);
+}
+
+.btnsub{
+  width: 140rpx;
+  background-color: #e28687;
+  color: #fff;
+  font-size: 30rpx;
+  line-height: 56rpx;
+  text-align: center;
+  float: right;
+  margin-top:10rpx; 
+  margin-left: 30rpx;
+}
+
+.btncancel{
+  background-color: #f3aec0;
+  color: #eee;
+}
+
+.bg_red{
+  background-color: #E25469;
+  border-radius: 10rpx;
+  color: #fff;
+}
+
+.editarea{
+  width: 560rpx;
+  background-color: #f3aec0;
+  color: #fff;
+  font-size: 32rpx;
+  border-radius: 15rpx;
+  margin-top: 20rpx;
+  height: 0;
+  padding:0;
+  overflow: hidden;
+  transition: height,padding 0.5s ;
+}
+
+.editarea.show{
+  padding: 20rpx;
+  height: 300rpx;
+}
+
+.holdercolor{
+  color: #fff;
+}
+
+.daiban,.done{
   width: 100%;
-  padding: 40rpx;
+  padding: 30rpx;
   box-sizing: border-box;
 }
-.icon-daiban{
-  color: #E25469;
-  font-size: 32rpx;
+
+.daiban .rote{
+  transform: rotateZ(135deg);
 }
