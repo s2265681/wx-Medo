@@ -84,6 +84,7 @@
 .textbox{
   color: #E25469;
   width: 240rpx;
+  margin-bottom: 20rpx;
 }
 
 .editthing .icon-xinzeng,.done .icon-yiwancheng,.daiban .icon-daiban{
@@ -127,7 +128,6 @@
   color: #fff;
   font-size: 32rpx;
   border-radius: 15rpx;
-  margin-top: 20rpx;
   height: 0;
   padding:0;
   overflow: hidden;

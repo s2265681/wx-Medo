@@ -13,7 +13,8 @@ Page({
     textareaShow: false,
     doingList: [],
     doneList: [],
-    textareaValue: ''
+    textareaValue: '',
+    today: util.formatTime(new Date, 'd')
   },
   
   bindViewTap: function() {
@@ -109,26 +110,51 @@ Page({
   },
 
   submit() {
+    if (!this.data.textareaValue){
+      wx.showToast({
+        title: '内容不能为空',
+      });
+      return;
+    }
     let time = util.formatTime(new Date(), 't');
+    let o = {
+      time: time,
+      text: this.data.textareaValue,
+      state: 'doing'
+    };
+    let doingList = this.data.doingList;
+    doingList.push(o);
+    this.setData({
+      doingList: doingList
+    });
+    
     if(!wx.getStorageSync('todoList')){
-      this.setData({
-        doingList: this.data.doingList.push({
-          time: time,
-          text: this.data.textareaValue,
-          state: 'doing'
-        })
-      })
       wx.setStorage({
         key: 'todoList',
         data: [{
           date:this.data.date,
-          list:[{
-            time: time,
-            text: this.data.textareaValue,
-            state: 'doing'
-          }]
+          list:[o]
         }],
       })
-    }
+    }else{
+      wx.getStorage({
+        key: 'todoList',
+        success: (res) => {
+          let data = res.data;
+          data.forEach(v => {
+            if (v.date === this.data.date) {
+              v.list.push(o)
+            }
+          })
+          wx.setStorage({
+            key: 'todoList',
+            data: data,
+          })
+        }
+      })
+    };
+    this.setData({
+      textareaShow: !this.data.textareaShow
+    })
   }
 })

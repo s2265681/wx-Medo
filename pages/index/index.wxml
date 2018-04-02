@@ -20,7 +20,7 @@
 
 <button bindtap='today' class="btntoday" hover-class="bg_red">Today</button>
 
-<view class="editthing">
+<view class="editthing" wx:if="{{date === today}}">
   <view class="textbox" bindtap="settextareaShow">
     <view class="icon-xinzeng iconfont {{textareaShow ? 'rote' : ''}}"></view>
     <text>新建事件</text>
@@ -33,10 +33,17 @@
 </view>
 
 <view class="daiban">
-  <view class="textbox" bindtap="settextareaShow">
+  <view class="textbox">
     <view class="iconfont icon-daiban {{textareaShow ? 'rote' : ''}}">
     </view>
     <text>待办事件</text>
+  </view>
+
+  <view class="doinglist">
+    <view wx:for="{{doingList}}" wx:key="{{item.date}}">
+      <text>{{item.text}}</text>
+      <text>{{item.time}}</text>
+    </view>
   </view>
 </view>
 
