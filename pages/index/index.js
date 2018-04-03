@@ -14,7 +14,10 @@ Page({
     doingList: [],
     doneList: [],
     textareaValue: '',
-    today: util.formatTime(new Date, 'd')
+    today: util.formatTime(new Date, 'd'),
+    startPageX: 0,
+    startLeft: 0,
+    startnowindex: 0
   },
   
   bindViewTap: function() {
@@ -56,8 +59,7 @@ Page({
               doneList: v.list.filter(m => m.state === 'done')
             })
           }
-        })
-        console.log(this.data.doingList);
+        });
       }
     })
   },
@@ -154,7 +156,35 @@ Page({
       })
     };
     this.setData({
-      textareaShow: !this.data.textareaShow
+      textareaShow: !this.data.textareaShow,
+      textareaValue: ''
+    })
+  },
+  evelistmove(e){
+    console.log(e)
+    this.setData({
+      startnowindex: e.currentTarget.dataset.nowindex
+    })
+    if (e.touches[0].pageX - this.data.startPageX < 0) {
+      if (Math.abs(e.touches[0].pageX - this.data.startPageX) < 100){
+        this.setData({
+          startLeft: e.touches[0].pageX - this.data.startPageX
+        })
+      }else{
+        this.setData({
+          startLeft: -180
+        })
+      }
+    } else {
+      this.setData({
+        startLeft: 0
+      })
+    }
+  },
+  eveliststart(e){
+    this.setData({
+      startPageX: e.touches[0].pageX
     })
   }
+
 })

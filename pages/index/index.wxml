@@ -20,7 +20,7 @@
 
 <button bindtap='today' class="btntoday" hover-class="bg_red">Today</button>
 
-<view class="editthing" wx:if="{{date === today}}">
+<view class="editthing" wx:if="{{date >= today}}">
   <view class="textbox" bindtap="settextareaShow">
     <view class="icon-xinzeng iconfont {{textareaShow ? 'rote' : ''}}"></view>
     <text>新建事件</text>
@@ -40,9 +40,16 @@
   </view>
 
   <view class="doinglist">
-    <view wx:for="{{doingList}}" wx:key="{{item.date}}">
-      <text>{{item.text}}</text>
-      <text>{{item.time}}</text>
+    <view wx:for="{{doingList}}" wx:key="{{item.date}}" class="evelist" bindtouchmove='evelistmove' bindtouchstart='eveliststart' id="evelist_doing" style="left:{{startnowindex === index ? startLeft : 0}}px" data-nowindex="{{index}}">
+      <view class="textbox">
+        <text>{{item.text}}</text>
+        <text>{{item.time}}</text>
+      </view>
+      <view class="btnbox">
+        <button class="iconfont {{item.state==='doing' ? 'icon-jiantou1-copy-copy' :'icon-jiantou1'}}"></button>
+        <button>查看</button>
+        <button>删除</button>
+      </view>
     </view>
   </view>
 </view>

@@ -152,3 +152,52 @@
 .daiban .rote{
   transform: rotateZ(135deg);
 }
+
+.evelist{
+  height: 100rpx;
+  background-color: #f3aec0;
+  color: #fff;
+  font-size: 32rpx;
+  margin-left: -30rpx;
+  margin-right: -30rpx;
+  position: relative;
+  margin-bottom: 10rpx;
+  transition: left 0.2s;
+}
+
+.evelist .textbox{
+  width: 100%;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  line-height: 100rpx;
+  position: absolute;
+  left:0;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+}
+.evelist .btnbox{
+  position: absolute;
+  top: 0;
+  right: -360rpx;
+  width: 360rpx;
+  height: 100rpx;
+  display: flex;
+  justify-content: flex-start;
+}
+.evelist .btnbox button{
+  width: 120rpx;
+  height: 100%;
+  background-color: #e28687;
+  color: #fff;
+  line-height: 100rpx;
+  border-radius: 0;
+  font-size: 30rpx;
+}
+.evelist .btnbox button:nth-of-type(2){
+  background-color: #25b25e;
+}
+.evelist .btnbox button:nth-of-type(3){
+  background-color: red;
+}
