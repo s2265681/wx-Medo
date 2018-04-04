@@ -48,18 +48,30 @@ Page({
         }
       })
     }
+    this.getstorageList();
+  },
+
+  getstorageList() {
     wx.getStorage({
       key: 'todoList',
       success: (res) => {
         let data = res.data;
-        data.forEach(v=>{
-          if (v.date === this.data.date){
+        let flag = true;
+        data.forEach(v => {
+          if (v.date === this.data.date) {
+            flag = false;
             this.setData({
               doingList: v.list.filter(m => m.state === 'doing'),
               doneList: v.list.filter(m => m.state === 'done')
             })
           }
         });
+        if(flag){
+          this.setData({
+            doingList: [],
+            doneList: []
+          })
+        }
       }
     })
   },
@@ -93,10 +105,12 @@ Page({
 
   next(){
     this.gettime('n');
+    this.getstorageList();
   },
 
   prev(){
     this.gettime('p');
+    this.getstorageList();
   },
 
   settextareaShow(){
@@ -143,11 +157,19 @@ Page({
         key: 'todoList',
         success: (res) => {
           let data = res.data;
+          let flag = false;
           data.forEach(v => {
             if (v.date === this.data.date) {
-              v.list.push(o)
+              v.list.push(o);
+              flag = true;
             }
           })
+          if(!flag){
+            data.push({
+              date: this.data.date,
+              list:[o]
+            })
+          }
           wx.setStorage({
             key: 'todoList',
             data: data,
@@ -161,29 +183,67 @@ Page({
     })
   },
   evelistmove(e){
-    console.log(e)
     this.setData({
       startnowindex: e.currentTarget.dataset.nowindex
     })
-    if (e.touches[0].pageX - this.data.startPageX < 0) {
-      if (Math.abs(e.touches[0].pageX - this.data.startPageX) < 100){
+    if (Math.abs(this.data.startLeft) < 180) {
+      if (e.touches[0].pageX - this.data.startPageX < 0) {
+        if (Math.abs(e.touches[0].pageX - this.data.startPageX) < 100) {
+          this.setData({
+            startLeft: e.touches[0].pageX - this.data.startPageX
+          })
+        } else {
+          this.setData({
+            startLeft: -180
+          })
+        }
+      } else {
         this.setData({
-          startLeft: e.touches[0].pageX - this.data.startPageX
-        })
-      }else{
-        this.setData({
-          startLeft: -180
+          startLeft: 0
         })
       }
     } else {
-      this.setData({
-        startLeft: 0
-      })
+      if (e.touches[0].pageX - this.data.startPageX < 0) {
+        return;
+      } else {
+        this.setData({
+          startLeft: 0
+        })
+      }
     }
   },
   eveliststart(e){
     this.setData({
       startPageX: e.touches[0].pageX
+    })
+  },
+  setdone(e){
+    let time = e.currentTarget.dataset.time;
+    wx.getStorage({
+      key: 'todoList',
+      success: (res) => {
+        let data = res.data;
+        data.forEach(v => {
+          if (v.date === this.data.date) {
+            v.list.forEach(m => {
+              if(m.time === time){
+                if(m.state === 'doing'){
+                  m.state = 'done';
+                }else{
+                  m.state = 'doing';
+                }
+              }
+            })
+          }
+        });
+        
+        wx.setStorage({
+          key: 'todoList',
+          data: data,
+        })
+
+        this.getstorageList();
+      }
     })
   }
 

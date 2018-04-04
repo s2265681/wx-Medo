@@ -23,7 +23,7 @@
 <view class="editthing" wx:if="{{date >= today}}">
   <view class="textbox" bindtap="settextareaShow">
     <view class="icon-xinzeng iconfont {{textareaShow ? 'rote' : ''}}"></view>
-    <text>新建事件</text>
+    <text>新建</text>
   </view>
 
   <textarea placeholder-class="holdercolor" show-confirm-bar="{{false}}" class="editarea {{textareaShow ? 'show' : ''}}" value="{{textareaValue}}" bindinput="settextareaValue"></textarea>
@@ -36,7 +36,7 @@
   <view class="textbox">
     <view class="iconfont icon-daiban {{textareaShow ? 'rote' : ''}}">
     </view>
-    <text>待办事件</text>
+    <text>待办</text>
   </view>
 
   <view class="doinglist">
@@ -46,9 +46,9 @@
         <text>{{item.time}}</text>
       </view>
       <view class="btnbox">
-        <button class="iconfont {{item.state==='doing' ? 'icon-jiantou1-copy-copy' :'icon-jiantou1'}}"></button>
-        <button>查看</button>
-        <button>删除</button>
+        <text class="iconfont {{item.state==='doing' ? 'icon-jiantou1-copy-copy' :'icon-jiantou1'}}" bindtap="setdone" data-time="{{item.time}}"></text>
+        <text>查看</text>
+        <text>删除</text>
       </view>
     </view>
   </view>
@@ -59,5 +59,18 @@
     <view class="iconfont icon-yiwancheng {{textareaShow ? 'rote' : ''}}">
     </view>
     <text>已完成</text>
+  </view>
+  <view class="donelist">
+    <view wx:for="{{doneList}}" wx:key="{{item.date}}" class="evelist" bindtouchmove='evelistmove' bindtouchstart='eveliststart' id="evelist_doing" style="left:{{startnowindex === index ? startLeft : 0}}px" data-nowindex="{{index}}">
+        <view class="textbox">
+          <text>{{item.text}}</text>
+          <text>{{item.time}}</text>
+        </view>
+        <view class="btnbox">
+          <text class="iconfont {{item.state==='doing' ? 'icon-jiantou1-copy-copy' :'icon-jiantou1'}}" bindtap="setdone" data-time="{{item.time}}"></text>
+          <text>查看</text>
+          <text>删除</text>
+        </view>
+      </view>
   </view>
 </view>

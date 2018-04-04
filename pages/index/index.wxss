@@ -147,6 +147,7 @@
   width: 100%;
   padding: 30rpx;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .daiban .rote{
@@ -186,7 +187,7 @@
   display: flex;
   justify-content: flex-start;
 }
-.evelist .btnbox button{
+.evelist .btnbox text{
   width: 120rpx;
   height: 100%;
   background-color: #e28687;
@@ -194,10 +195,11 @@
   line-height: 100rpx;
   border-radius: 0;
   font-size: 30rpx;
+  text-align: center;
 }
-.evelist .btnbox button:nth-of-type(2){
+.evelist .btnbox text:nth-of-type(2){
   background-color: #25b25e;
 }
-.evelist .btnbox button:nth-of-type(3){
+.evelist .btnbox text:nth-of-type(3){
   background-color: red;
 }
