@@ -1,76 +1,81 @@
 <!--index.wxml-->
-<view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo" class="getbtn"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">Hi , {{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="dateSection">
-    <button bindtap='prev' class="iconfont icon-left" hover-class="bg_red"></button>
-    <picker mode="date" value="{{date}}" start="2015-09-01" end="2020-12-31" bindchange="bindDateChange">
-      <view class="picker">
-        {{date}}
-      </view>
-    </picker>
-    <button bindtap='next' class="iconfont  icon-arrow-right" hover-class="bg_red"></button>
-  </view>
-</view>
+<view id="app">
+  <image src="{{backimg}}" class="backimg" mode="aspectFill"></image>
 
-<button bindtap='today' class="btntoday" hover-class="bg_red">Today</button>
-
-<view class="editthing" wx:if="{{date >= today}}">
-  <view class="textbox" bindtap="settextareaShow">
-    <view class="icon-xinzeng iconfont {{textareaShow ? 'rote' : ''}}"></view>
-    <text>新建</text>
-  </view>
-
-  <textarea placeholder-class="holdercolor" show-confirm-bar="{{false}}" class="editarea {{textareaShow ? 'show' : ''}}" value="{{textareaValue}}" bindinput="settextareaValue"></textarea>
-
-  <button bindtap='submit' class="btnsub" hover-class="bg_red" wx:if="{{textareaShow}}">确定</button>
-  <button bindtap='cancel' class="btnsub btncancel" hover-class="bg_red" wx:if="{{textareaShow}}">取消</button>
-</view>
-
-<view class="daiban">
-  <view class="textbox">
-    <view class="iconfont icon-daiban {{textareaShow ? 'rote' : ''}}">
+  <view class="appinner">
+    <view class="container">
+      <view class="userinfo" hover-class='border-hover' bindtap="bindViewTap">
+        <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" catchtap="getUserInfo" class="getbtn"> 获取头像昵称 </button>
+        <block wx:else>
+        <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+        <text class="userinfo-nickname" wx:if="{{userInfo.nickName}}">Hi , {{userInfo.nickName}}</text>
+      </block>
     </view>
-    <text>待办</text>
-  </view>
-
-  <view class="doinglist">
-    <view wx:for="{{doingList}}" wx:key="{{item.date}}" class="evelist" bindtouchmove='evelistmove' bindtouchstart='eveliststart' id="evelist_doing" style="left:{{startnowindex === index ? startLeft : 0}}px" data-nowindex="{{index}}">
-      <view class="textbox">
-        <text>{{item.text}}</text>
-        <text>{{item.time}}</text>
-      </view>
-      <view class="btnbox">
-        <text class="iconfont {{item.state==='doing' ? 'icon-jiantou1-copy-copy' :'icon-jiantou1'}}" bindtap="setdone" data-time="{{item.time}}"></text>
-        <text>查看</text>
-        <text>删除</text>
-      </view>
+    <view class="dateSection">
+      <button bindtap='prev' class="iconfont icon-left" hover-class="bg_red"></button>
+      <picker mode="date" value="{{date}}" start="2015-09-01" end="2020-12-31" bindchange="bindDateChange">
+        <view class="picker">
+          {{date}}
+        </view>
+      </picker>
+      <button bindtap='next' class="iconfont  icon-arrow-right" hover-class="bg_red"></button>
     </view>
   </view>
-</view>
 
-<view class="done">
-  <view class="textbox" bindtap="settextareaShow">
-    <view class="iconfont icon-yiwancheng {{textareaShow ? 'rote' : ''}}">
+  <button bindtap='today' class="btntoday" hover-class="bg_red">Today</button>
+
+  <view class="editthing" wx:if="{{date >= today}}">
+    <view class="textbox" bindtap="settextareaShow">
+      <view class="icon-xinzeng iconfont {{textareaShow ? 'rote' : ''}}"></view>
+      <text>新建</text>
     </view>
-    <text>已完成</text>
+
+    <textarea placeholder-class="holdercolor" show-confirm-bar="{{false}}" class="editarea {{textareaShow ? 'show' : ''}}" value="{{textareaValue}}" bindinput="settextareaValue"></textarea>
+
+    <button bindtap='submit' class="btnsub" hover-class="bg_red" wx:if="{{textareaShow}}">确定</button>
+    <button bindtap='cancel' class="btnsub btncancel" hover-class="bg_red" wx:if="{{textareaShow}}">取消</button>
   </view>
-  <view class="donelist">
-    <view wx:for="{{doneList}}" wx:key="{{item.date}}" class="evelist" bindtouchmove='evelistmove' bindtouchstart='eveliststart' id="evelist_doing" style="left:{{startnowindex === index ? startLeft : 0}}px" data-nowindex="{{index}}">
+
+  <view class="daiban">
+    <view class="textbox" >
+      <view class="iconfont icon-daiban {{textareaShow ? 'rote' : ''}}">
+      </view>
+      <text>待办</text>
+    </view>
+
+    <view class="doinglist">
+      <view wx:for="{{doingList}}" wx:key="{{item.time}}" class="evelist" bindtouchmove='evelistmove' bindtouchstart='eveliststart' id="evelist_doing" style="left:{{startnowindex === item.time ? startLeft : 0}}px" data-nowindex="{{item.time}}" bindtouchend="evelistend" hover-class="bg_red">
         <view class="textbox">
           <text>{{item.text}}</text>
           <text>{{item.time}}</text>
         </view>
         <view class="btnbox">
           <text class="iconfont {{item.state==='doing' ? 'icon-jiantou1-copy-copy' :'icon-jiantou1'}}" bindtap="setdone" data-time="{{item.time}}"></text>
-          <text>查看</text>
-          <text>删除</text>
+          <text bindtap="deldo" data-time="{{item.time}}">删除</text>
         </view>
       </view>
+    </view>
   </view>
+
+  <view class="done">
+    <view class="textbox">
+      <view class="iconfont icon-yiwancheng {{textareaShow ? 'rote' : ''}}">
+      </view>
+      <text>已完成</text>
+    </view>
+    <view class="donelist">
+      <view wx:for="{{doneList}}" wx:key="{{item.time}}" class="evelist" bindtouchmove='evelistmove' bindtouchstart='eveliststart' id="evelist_doing" style="left:{{startnowindex === item.time ? startLeft : 0}}px" data-nowindex="{{item.time}}" bindtouchend="evelistend" hover-class="bg_red">
+          <view class="textbox">
+            <text>{{item.text}}</text>
+            <text>{{item.time}}</text>
+          </view>
+          <view class="btnbox">
+            <text class="iconfont {{item.state==='doing' ? 'icon-jiantou1-copy-copy' :'icon-jiantou1'}}" bindtap="setdone" data-time="{{item.time}}"></text>
+            <text bindtap="deldo" data-time="{{item.time}}">删除</text>
+          </view>
+        </view>
+    </view>
+  </view>
+  </view>
+  
 </view>

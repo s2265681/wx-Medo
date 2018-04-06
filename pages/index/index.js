@@ -8,7 +8,6 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     date: util.formatTime(new Date,'d'),
     textareaShow: false,
     doingList: [],
@@ -17,10 +16,14 @@ Page({
     today: util.formatTime(new Date, 'd'),
     startPageX: 0,
     startLeft: 0,
-    startnowindex: 0
+    startnowindex: 0,
+    backimg: ''
   },
   
   bindViewTap: function() {
+    wx.navigateTo({
+      url: '../mine/mine'
+    })
   },
 
   onLoad: function () {
@@ -29,25 +32,30 @@ Page({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-    } else if (this.data.canIUse){
-      app.userInfoReadyCallback = res => {
+    } else {
+      app.userInfoReadyCallback=(res) => {
+        app.globalData.userInfo = res.userInfo;
         this.setData({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
       }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
+      if (!this.data.hasUserInfo){
+        this.getUserInfo();
+      }
+    };
+    wx.getStorage({
+      key: 'wallpaper',
+      success: (res) => {
+        res.data.forEach(v => {
+          if(v.active){
+            this.setData({
+              backimg: v.url
+            })
+          }
+        })
+      }
+    });
     this.getstorageList();
   },
 
@@ -76,12 +84,16 @@ Page({
     })
   },
 
-  getUserInfo: function(e) {
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
+  getUserInfo(){
+    wx.getUserInfo({
+      success: res => {
+        app.globalData.userInfo = res.userInfo
+        this.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
+        })
+      }
+    });
   },
 
   bindDateChange(e){
@@ -182,25 +194,27 @@ Page({
       textareaValue: ''
     })
   },
+  cancel(){
+    this.setData({
+      textareaShow: !this.data.textareaShow,
+      textareaValue: ''
+    })
+  },
   evelistmove(e){
     this.setData({
       startnowindex: e.currentTarget.dataset.nowindex
     })
-    if (Math.abs(this.data.startLeft) < 180) {
-      if (e.touches[0].pageX - this.data.startPageX < 0) {
-        if (Math.abs(e.touches[0].pageX - this.data.startPageX) < 100) {
+    if (Math.abs(this.data.startLeft) < 60) {
+      if (e.touches[0].pageX - this.data.startPageX < 0){
+        if (e.touches[0].pageX - this.data.startPageX > -60) {
           this.setData({
             startLeft: e.touches[0].pageX - this.data.startPageX
           })
         } else {
           this.setData({
-            startLeft: -180
+            startLeft: -160
           })
         }
-      } else {
-        this.setData({
-          startLeft: 0
-        })
       }
     } else {
       if (e.touches[0].pageX - this.data.startPageX < 0) {
@@ -210,6 +224,13 @@ Page({
           startLeft: 0
         })
       }
+    }
+  },
+  evelistend(){
+    if (Math.abs(this.data.startLeft) < 60){
+      this.setData({
+        startLeft: 0
+      })
     }
   },
   eveliststart(e){
@@ -243,6 +264,43 @@ Page({
         })
 
         this.getstorageList();
+        this.setData({
+          startLeft: 0
+        })
+      }
+    })
+  },
+  deldo(e){
+    wx.showModal({
+      title:'提示',
+      content:'确认删除？',
+      success:(res) => {
+        if(res.confirm){
+          let time = e.currentTarget.dataset.time;
+          wx.getStorage({
+            key: 'todoList',
+            success: (res) => {
+              let data = res.data;
+              data.forEach(v => {
+                if (v.date === this.data.date) {
+                  v.list = v.list.filter(m => 
+                    m.time !== time
+                  )
+                }
+              });
+
+              wx.setStorage({
+                key: 'todoList',
+                data: data,
+              })
+              this.getstorageList();
+            }
+          })
+        }else if(res.cancel){
+          this.setData({
+            startLeft: 0
+          })
+        }
       }
     })
   }

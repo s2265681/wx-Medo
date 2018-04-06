@@ -1,11 +1,13 @@
 {
-  "pages":[
-    "pages/index/index"
+  "pages": [
+    "pages/index/index",
+    "pages/mine/mine",
+    "pages/mine/wallpaper"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#E25C6D",
     "navigationBarTitleText": "Me do",
-    "navigationBarTextStyle":"#fff"
+    "navigationBarTextStyle": "#fff"
   }
 }

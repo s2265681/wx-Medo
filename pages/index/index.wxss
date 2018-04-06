@@ -1,9 +1,43 @@
 /**index.wxss**/
 @import '../../assets/font/iconfont.wxss';
+page{
+  width: 100%;
+  height: 100%;
+}
+#app{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.backimg{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+.appinner{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  overflow-y: auto;
+}
 .userinfo {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 0 10px transparent;
+  padding: 0 15rpx;
+  box-sizing: border-box;
+}
+
+.border-hover{
+  box-shadow:  0 0 10px #E25469;
 }
 
 .getbtn{
@@ -20,7 +54,7 @@
 }
 
 .userinfo-nickname {
-  color: #aaa;
+  color: #323232;
   font-size: 32rpx;
 }
 
@@ -116,12 +150,6 @@
   color: #eee;
 }
 
-.bg_red{
-  background-color: #E25469;
-  border-radius: 10rpx;
-  color: #fff;
-}
-
 .editarea{
   width: 560rpx;
   background-color: #f3aec0;
@@ -131,7 +159,7 @@
   height: 0;
   padding:0;
   overflow: hidden;
-  transition: height,padding 0.5s ;
+  transition: height,padding 1s ;
 }
 
 .editarea.show{
@@ -155,7 +183,7 @@
 }
 
 .evelist{
-  height: 100rpx;
+  height: 120rpx;
   background-color: #f3aec0;
   color: #fff;
   font-size: 32rpx;
@@ -163,14 +191,14 @@
   margin-right: -30rpx;
   position: relative;
   margin-bottom: 10rpx;
-  transition: left 0.2s;
+  transition: left 0.5s;
 }
 
 .evelist .textbox{
   width: 100%;
   padding: 0 20rpx;
   box-sizing: border-box;
-  line-height: 100rpx;
+  line-height: 120rpx;
   position: absolute;
   left:0;
   top: 0;
@@ -181,25 +209,37 @@
 .evelist .btnbox{
   position: absolute;
   top: 0;
-  right: -360rpx;
-  width: 360rpx;
-  height: 100rpx;
+  right: -326rpx;
+  width: 326rpx;
+  height: 120rpx;
   display: flex;
   justify-content: flex-start;
 }
 .evelist .btnbox text{
-  width: 120rpx;
+  width: 163rpx;
   height: 100%;
   background-color: #e28687;
   color: #fff;
-  line-height: 100rpx;
+  line-height: 120rpx;
   border-radius: 0;
   font-size: 30rpx;
   text-align: center;
 }
-.evelist .btnbox text:nth-of-type(2){
-  background-color: #25b25e;
+.evelist .btnbox text:nth-of-type(1):hover{
+  background-color: #E25469;
 }
-.evelist .btnbox text:nth-of-type(3){
+/* .evelist .btnbox text:nth-of-type(2){
+  background-color: #25b25e;
+} */
+.evelist .btnbox text:nth-of-type(2){
   background-color: red;
+  opacity: 0.7;
+}
+.evelist .btnbox text:nth-of-type(2):hover{
+  opacity: 1;
+}
+.bg_red{
+  background-color: #E25469;
+  border-radius: 10rpx;
+  color: #fff;
 }

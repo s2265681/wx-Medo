@@ -1,11 +1,6 @@
 //app.js
 App({
   onLaunch: function () {
-    // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
     // 登录
     wx.login({
       success: res => {
@@ -31,7 +26,18 @@ App({
           })
         }
       }
-    })
+    });
+    if (!wx.getStorageSync('wallpaper')){
+      wx.setStorage({
+        key: 'wallpaper',
+        data: [
+          {url:'../../assets/images/2.jpg', active:false,key:'mine'},
+          { url: '../../assets/images/3.jpg', active: false, key: 'mine'},
+          { url: '../../assets/images/5.jpg', active: false, key: 'mine'},
+          { url: '', active: true, key: 'mine'}
+        ],
+      })
+    }
   },
   globalData: {
     userInfo: null
