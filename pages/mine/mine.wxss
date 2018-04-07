@@ -1,0 +1,22 @@
+.setting{
+  width: 100%;
+  padding: 10rpx 0;
+}
+
+.setting >view{
+  background-color: #e28687;
+  color: #fff;
+  width: 100%;
+  height: 100rpx;
+  margin-bottom: 20rpx;
+  padding-left: 20rpx;
+  box-sizing: border-box;
+  line-height: 100rpx;
+  font-size: 32rpx;
+}
+
+.bg_red{
+  background-color: #E25469;
+  border-radius: 10rpx;
+  color: #fff;
+}

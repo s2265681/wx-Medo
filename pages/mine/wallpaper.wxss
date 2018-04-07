@@ -1,0 +1,75 @@
+@import '../../assets/font/iconfont.wxss';
+.manage{
+  font-size: 28rpx;
+  float: right;
+  margin-right:40rpx;
+  margin-top:10rpx;
+  color: #e28687;
+}
+
+.manage.active{
+  color: #E25469;
+  font-weight: 600;
+}
+
+.imagelist{
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding: 20rpx;
+  box-sizing: border-box;
+  margin-bottom: 20rpx;
+}
+
+.imagelist image{
+  width: 220rpx;
+  height: 220rpx;
+}
+
+.imagebox{
+  position: relative;
+  width: 220rpx;
+  height: 220rpx;
+  margin-right: 15rpx;
+  background-color: #fff;
+  margin-bottom: 15rpx;
+  border: 1px solid #e28687;
+  box-sizing: border-box;
+}
+
+.imagebox .icon-yiwancheng{
+  font-size: 64rpx;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  color: #49E282;
+}
+
+.imagebox .delimg{
+  width: 48rpx;
+  height: 48rpx;
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 48rpx;
+  color: #eaeaea;
+  transform: rotate(45deg);
+}
+
+.upload{
+  font-size: 32rpx;
+  background-color: #e28687;
+  margin: 0 auto;
+  border-radius: 10rpx;
+  color: #fff;
+  width: 160rpx;
+  line-height: 80rpx;
+  text-align: center;
+}
+
+.bg_red{
+  background-color: #E25469;
+  border-radius: 10rpx;
+  color: #fff;
+}

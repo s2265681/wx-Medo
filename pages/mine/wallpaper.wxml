@@ -1,0 +1,14 @@
+<view class="manage {{showdel ? 'active' : ''}}" bindtap='manageimg'>删除</view>
+
+<view class="imagelist">
+  <view wx:for="{{imagelist}}" wx:key="{{item.url}}" class="imagebox" bindtap='setcurrback' data-url="{{item.url}}">
+    <image src="{{item.url}}" mode="scaleToFill" wx:if="{{item.url}}"></image>
+
+    <text class="iconfont icon-yiwancheng" wx:if="{{item.active}}">
+    </text>
+
+    <text class="delimg iconfont icon-add" catch:tap="delimg" data-url="{{item.url}}" wx:if="{{!item.active && showdel}}" data-key="{{item.key}}">
+    </text>
+  </view>
+</view>
+<view class="upload" hover-class="bg_red" bindtap='upload'>上传</view>

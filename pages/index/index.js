@@ -44,11 +44,15 @@ Page({
         this.getUserInfo();
       }
     };
+
+    this.getstorageList();
+  },
+  onShow: function () {
     wx.getStorage({
       key: 'wallpaper',
       success: (res) => {
         res.data.forEach(v => {
-          if(v.active){
+          if (v.active) {
             this.setData({
               backimg: v.url
             })
@@ -56,9 +60,7 @@ Page({
         })
       }
     });
-    this.getstorageList();
   },
-
   getstorageList() {
     wx.getStorage({
       key: 'todoList',
@@ -155,7 +157,6 @@ Page({
     this.setData({
       doingList: doingList
     });
-    
     if(!wx.getStorageSync('todoList')){
       wx.setStorage({
         key: 'todoList',
@@ -174,20 +175,20 @@ Page({
             if (v.date === this.data.date) {
               v.list.push(o);
               flag = true;
-            }
-          })
+            };
+          });
           if(!flag){
             data.push({
               date: this.data.date,
               list:[o]
-            })
-          }
+            });
+          };
           wx.setStorage({
             key: 'todoList',
             data: data,
-          })
+          });
         }
-      })
+      });
     };
     this.setData({
       textareaShow: !this.data.textareaShow,
@@ -281,13 +282,23 @@ Page({
             key: 'todoList',
             success: (res) => {
               let data = res.data;
+              let flag = false;
               data.forEach(v => {
                 if (v.date === this.data.date) {
                   v.list = v.list.filter(m => 
                     m.time !== time
-                  )
-                }
+                  );
+                  if(!v.list.length){
+                    flag = true;
+                  }
+                };
               });
+
+              if (flag) {
+                data = data.filter(v => {
+                  v.date !== this.data.date;
+                });
+              };
 
               wx.setStorage({
                 key: 'todoList',

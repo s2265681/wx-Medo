@@ -159,7 +159,7 @@ page{
   height: 0;
   padding:0;
   overflow: hidden;
-  transition: height,padding 1s ;
+  transition: height,padding 0.5s ;
 }
 
 .editarea.show{

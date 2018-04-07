@@ -1,15 +1,15 @@
 <!--index.wxml-->
 <view id="app">
-  <image src="{{backimg}}" class="backimg" mode="aspectFill"></image>
+  <image src="{{backimg}}" class="backimg" mode="aspectFill" wx:if="{{backimg}}"></image>
 
   <view class="appinner">
     <view class="container">
       <view class="userinfo" hover-class='border-hover' bindtap="bindViewTap">
-        <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" catchtap="getUserInfo" class="getbtn"> 获取头像昵称 </button>
+        <button wx:if="{{!hasUserInfo}}" catchtap="getUserInfo" class="getbtn"> 获取头像昵称 </button>
         <block wx:else>
-        <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-        <text class="userinfo-nickname" wx:if="{{userInfo.nickName}}">Hi , {{userInfo.nickName}}</text>
-      </block>
+          <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+          <text class="userinfo-nickname" wx:if="{{userInfo.nickName}}">Hi , {{userInfo.nickName}}</text>
+        </block>
     </view>
     <view class="dateSection">
       <button bindtap='prev' class="iconfont icon-left" hover-class="bg_red"></button>

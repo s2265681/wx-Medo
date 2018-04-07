@@ -1,0 +1,5 @@
+<!--pages/mine/mine.wxml-->
+<view class="setting">
+  <view class="wallpaper" hover-class="bg_red" bindtap="navigate" data-url="wallpaper">主题壁纸</view>
+  <view class="wallpaper" hover-class="bg_red">主题颜色</view>
+</view>
