@@ -3,15 +3,18 @@
 
 ### 首页
 > 可进行添加事件等的操作
-![test image size](./image/22.png){:height="108px" width="192px"}
+
+![test image size](./image/22.png)
 
 ### 二级
 > 用户授权后可进入
-![test image size](./image/44.png){:height="108px" width="192px"}
+
+![test image size](./image/44.png)
 ### 壁纸设置
 > 壁纸的设置 、上传 、删除等
-![test image size](./image/33.png){:height="108px" width="192px"}
-![test image size](./image/11.png){:height="108px" width="192px"}
+
+![test image size](./image/33.png)
+![test image size](./image/11.png)
 ### 本地存储
 * todolist
 ``` {
