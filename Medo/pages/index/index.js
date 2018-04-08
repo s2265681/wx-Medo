@@ -234,6 +234,12 @@ Page({
       })
     }
   },
+  apptouch(){
+    console.log(11)
+    this.setData({
+      startLeft: 0
+    })
+  },
   eveliststart(e){
     this.setData({
       startPageX: e.touches[0].pageX

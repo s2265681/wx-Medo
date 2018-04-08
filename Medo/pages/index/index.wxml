@@ -1,5 +1,5 @@
 <!--index.wxml-->
-<view id="app">
+<view id="app" bindtouchstart="apptouch">
   <image src="{{backimg}}" class="backimg" mode="aspectFill" wx:if="{{backimg}}"></image>
 
   <view class="appinner">
