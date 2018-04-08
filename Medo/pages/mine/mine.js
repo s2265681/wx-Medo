@@ -20,8 +20,16 @@ Page({
   },
 
   navigate(e){
-    wx.navigateTo({
-      url: e.currentTarget.dataset.url
-    })
+    if (e.currentTarget.dataset.url){
+      wx.navigateTo({
+        url: e.currentTarget.dataset.url
+      });
+    }else{
+      wx.showModal({
+        content: '敬请期待！',
+        showCancel: false
+      })
+    }
+    
   }
 })

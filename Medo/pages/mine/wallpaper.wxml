@@ -7,7 +7,7 @@
     <text class="iconfont icon-yiwancheng" wx:if="{{item.active}}">
     </text>
 
-    <text class="delimg iconfont icon-add" catch:tap="delimg" data-url="{{item.url}}" wx:if="{{!item.active && showdel}}" data-key="{{item.key}}">
+    <text class="delimg iconfont icon-add" catch:tap="delimg" data-url="{{item.url}}" wx:if="{{!item.active && showdel && item.url}}" data-key="{{item.key}}">
     </text>
   </view>
 </view>
